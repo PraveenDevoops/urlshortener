@@ -1,7 +1,7 @@
 version: "3"
 services:
   front:
-    image: node:14
+    image: node:lts
     ports:
       - 3000:3000
     volumes:
@@ -10,6 +10,7 @@ services:
       - /bin/bash
       - -c
       - |
+        BROWSER=none
         cd /opt/app
         npm install
         npm start
