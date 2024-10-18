@@ -10,12 +10,11 @@ services:
       - /bin/bash
       - -c
       - |
-        BROWSER=none
         cd /opt/app
         npm install
         npm start
   back:
-    image: node:14
+    image: node:lts
     environment:
       - PORT=3003
       - DB_PASSWORD=shorties
