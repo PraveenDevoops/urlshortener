@@ -17,8 +17,12 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
-    let urls = await Api.getUrls();
-    this.setState({ urls });
+    try {
+      let urls = await Api.getUrls();
+      this.setState({ urls });
+    } catch (error) {
+      
+    }
   }
 
   render() {

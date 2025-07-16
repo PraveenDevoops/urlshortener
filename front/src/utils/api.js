@@ -4,16 +4,24 @@ class API {
   url = Config.BASE_URL;
 
   async getServerStatus() {
-    const status = await fetch(`${this.url}/health`)
+    try {
+      const status = await fetch(`${this.url}/health`)
       .then(resp => resp.json());
-    return status;
+      return status;    
+    } catch (error) {
+      
+    }
   }
 
   async getUrls() {
-    const urls = await fetch(`${this.url}/urls`)
+    try {
+      const urls = await fetch(`${this.url}/urls`)
       .then(resp => resp.json());
-
     return urls;
+    } catch (error) {
+      let jsonArray = [];
+      return jsonArray;
+    }
   }
 
   async addUrl(data) {
