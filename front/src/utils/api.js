@@ -5,6 +5,7 @@ class API {
 
   async getServerStatus() {
     try {
+      console.log(`${this.url}/health`);
       const status = await fetch(`${this.url}/health`)
       .then(resp => resp.json());
       return status;    

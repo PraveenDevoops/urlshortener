@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
+const cors = require('cors');
+
+router.use(cors());
+
 const { Client } = require("../utils/getClient");
 
 /* GET home page. */

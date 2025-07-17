@@ -1,8 +1,6 @@
-# FROM node:14
-FROM node:lts
+FROM node:14
 
-#ENV JQ_VERSION=1.6
-ENV JQ_VERSION=1.8.1
+ENV JQ_VERSION=1.6
 RUN wget --no-check-certificate https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 -O /tmp/jq-linux64
 RUN cp /tmp/jq-linux64 /usr/bin/jq
 RUN chmod +x /usr/bin/jq
@@ -12,8 +10,7 @@ COPY . .
 RUN jq 'to_entries | map_values({ (.key) : ("$" + .key) }) | reduce .[] as $item ({}; . + $item)' ./src/config.json > ./src/config.tmp.json && mv ./src/config.tmp.json ./src/config.json
 RUN npm install && npm run build
 
-# FROM nginx:1.17
-FROM nginx:latest
+FROM nginx:1.17
 ENV JSFOLDER=/opt/app/static/js/main*.js
 COPY ./nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /opt/app && chown -R nginx:nginx /opt/app && chmod -R 775 /opt/app
